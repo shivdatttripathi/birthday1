@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>😡 ANGRY MODE ACTIVATED!</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Creepster&family=Bungee&family=Fredoka+One:wght@400&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Fredoka One", cursive;
+        background: linear-gradient(45deg, #ff0000, #cc0000, #990000, #660000);
+        background-size: 400% 400%;
+        animation: angryBackground 2s ease-in-out infinite;
+        overflow-x: hidden;
+        min-height: 100vh;
+        cursor: none;
+      }
+
+      @keyframes angryBackground {
+        0%,
+        100% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+      }
+
+      .angry-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+        position: relative;
+      }
+
+      .angry-face {
+        font-size: 15rem;
+        animation: angryShake 0.5s infinite;
+        margin-bottom: 30px;
+        text-shadow: 0 0 50px rgba(255, 0, 0, 0.8);
+      }
+
+      @keyframes angryShake {
+        0%,
+        100% {
+          transform: rotate(-5deg) scale(1);
+        }
+        25% {
+          transform: rotate(5deg) scale(1.1);
+        }
+        50% {
+          transform: rotate(-3deg) scale(0.9);
+        }
+        75% {
+          transform: rotate(3deg) scale(1.05);
+        }
+      }
+
+      .angry-title {
+        font-family: "Bungee", cursive;
+        font-size: 4rem;
+        color: #fff;
+        text-align: center;
+        margin-bottom: 20px;
+        text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000,
+          0 0 40px #ff0000;
+        animation: angroPulse 1s infinite;
+      }
+
+      @keyframes angroPulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+      }
+
+      .angry-message {
+        background: rgba(0, 0, 0, 0.8);
+        color: #fff;
+        padding: 30px;
+        border-radius: 20px;
+        text-align: center;
+        max-width: 800px;
+        margin-bottom: 30px;
+        border: 3px solid #ff0000;
+        box-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
+        animation: messageShake 2s infinite;
+      }
+
+      @keyframes messageShake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        10% {
+          transform: translateX(-10px);
+        }
+        20% {
+          transform: translateX(10px);
+        }
+        30% {
+          transform: translateX(-10px);
+        }
+        40% {
+          transform: translateX(10px);
+        }
+        50% {
+          transform: translateX(0);
+        }
+      }
+
+      .angry-text {
+        font-size: 1.8rem;
+        line-height: 1.6;
+        margin-bottom: 20px;
+      }
+
+      .warning-text {
+        font-size: 1.4rem;
+        color: #ffff00;
+        font-weight: bold;
+        animation: warningBlink 1s infinite;
+      }
+
+      @keyframes warningBlink {
+        0%,
+        50% {
+          opacity: 1;
+        }
+        51%,
+        100% {
+          opacity: 0;
+        }
+      }
+
+      .funny-insults {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin: 30px 0;
+        max-width: 1000px;
+      }
+
+      .insult-card {
+        background: rgba(0, 0, 0, 0.9);
+        color: #fff;
+        padding: 20px;
+        border-radius: 15px;
+        text-align: center;
+        border: 2px solid #ff4444;
+        animation: cardFloat 3s ease-in-out infinite;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .insult-card:nth-child(even) {
+        animation-delay: 0.5s;
+      }
+
+      .insult-card:nth-child(3n) {
+        animation-delay: 1s;
+      }
+
+      @keyframes cardFloat {
+        0%,
+        100% {
+          transform: translateY(0px) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-20px) rotate(2deg);
+        }
+      }
+
+      .insult-emoji {
+        font-size: 3rem;
+        margin-bottom: 10px;
+        display: block;
+      }
+
+      .insult-text {
+        font-size: 1.2rem;
+        line-height: 1.4;
+      }
+
+      .countdown {
+        font-size: 3rem;
+        color: #ffff00;
+        font-family: "Bungee", cursive;
+        text-shadow: 0 0 20px #ffff00;
+        animation: countdownPulse 1s infinite;
+        margin: 20px 0;
+      }
+
+      @keyframes countdownPulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.3);
+        }
+      }
+
+      .flying-emojis {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1000;
+      }
+
+      .flying-emoji {
+        position: absolute;
+        font-size: 3rem;
+        animation: flyAngry 4s linear infinite;
+      }
+
+      @keyframes flyAngry {
+        0% {
+          transform: translateX(-100px) translateY(100vh) rotate(0deg);
+          opacity: 1;
+        }
+        100% {
+          transform: translateX(100vw) translateY(-100px) rotate(360deg);
+          opacity: 0;
+        }
+      }
+
+      .screen-shake {
+        animation: screenShake 0.1s infinite;
+      }
+
+      @keyframes screenShake {
+        0%,
+        100% {
+          transform: translate(0, 0) rotate(0deg);
+        }
+        10% {
+          transform: translate(-2px, -1px) rotate(-1deg);
+        }
+        20% {
+          transform: translate(-1px, 0px) rotate(1deg);
+        }
+        30% {
+          transform: translate(2px, 1px) rotate(0deg);
+        }
+        40% {
+          transform: translate(1px, -1px) rotate(1deg);
+        }
+        50% {
+          transform: translate(-1px, 1px) rotate(-1deg);
+        }
+        60% {
+          transform: translate(-2px, 0px) rotate(0deg);
+        }
+        70% {
+          transform: translate(2px, 1px) rotate(-1deg);
+        }
+        80% {
+          transform: translate(-1px, -1px) rotate(1deg);
+        }
+        90% {
+          transform: translate(1px, 0px) rotate(0deg);
+        }
+      }
+
+      .go-back-btn {
+        background: linear-gradient(45deg, #333, #666);
+        color: #fff;
+        border: 2px solid #ff0000;
+        padding: 15px 30px;
+        font-size: 1.3rem;
+        border-radius: 10px;
+        cursor: pointer;
+        font-family: "Fredoka One", cursive;
+        transition: all 0.3s ease;
+        animation: btnGlow 2s infinite;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .go-back-btn:hover {
+        background: linear-gradient(45deg, #666, #999);
+        transform: scale(1.1);
+        box-shadow: 0 0 30px rgba(255, 0, 0, 0.8);
+      }
+
+      @keyframes btnGlow {
+        0%,
+        100% {
+          box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+        }
+        50% {
+          box-shadow: 0 0 25px rgba(255, 0, 0, 0.8);
+        }
+      }
+
+      .angry-cursor {
+        position: fixed;
+        width: 30px;
+        height: 30px;
+        pointer-events: none;
+        z-index: 9999;
+        font-size: 25px;
+        animation: cursorSpin 1s linear infinite;
+      }
+
+      @keyframes cursorSpin {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .angry-title {
+          font-size: 2.5rem;
+        }
+        .angry-face {
+          font-size: 8rem;
+        }
+        .angry-text {
+          font-size: 1.4rem;
+        }
+        .countdown {
+          font-size: 2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="angry-cursor" id="angryCursor">😡</div>
+    <div class="flying-emojis" id="flyingEmojis"></div>
+
+    <div class="angry-container">
+      <div class="angry-face">🤬</div>
+
+      <h1 class="angry-title">WRONG PASSWORD!</h1>
+
+      <div class="angry-message">
+        <p class="angry-text">
+          <strong>ARE YOU KIDDING ME?! 😤</strong><br /><br />
+          This is a PRIVATE romantic website for someone SPECIAL! <br />
+          Tu kya samajhta hai, yahan koi joke chal raha hai?! 🤣<br /><br />
+          <span class="warning-text">⚠️ WARNING: ANGRY MODE ACTIVATED! ⚠️</span>
+        </p>
+      </div>
+
+      <div class="funny-insults">
+        <div class="insult-card">
+          <span class="insult-emoji">🤡</span>
+          <p class="insult-text">
+            "Bhai password guess karne ki ninja technique seekhi kahan se?
+            YouTube se? 😂"
+          </p>
+        </div>
+
+        <div class="insult-card">
+          <span class="insult-emoji">🕵️</span>
+          <p class="insult-text">
+            "Sherlock Holmes ban gaya hai! Par yahan koi mystery solve nahi
+            hogi! 🔍"
+          </p>
+        </div>
+
+        <div class="insult-card">
+          <span class="insult-emoji">🤯</span>
+          <p class="insult-text">
+            "Dimag use kar, password guess nahi kar! Yahan sirf SPECIAL person
+            ka entry hai! 👑"
+          </p>
+        </div>
+
+        <div class="insult-card">
+          <span class="insult-emoji">😈</span>
+          <p class="insult-text">
+            "Hacker banne ki koshish mat kar! Warna main aur bhi angry ho
+            jaunga! 😡"
+          </p>
+        </div>
+
+        <div class="insult-card">
+          <span class="insult-emoji">🙄</span>
+          <p class="insult-text">
+            "Privacy ki respect kar yaar! Apna kaam kar, doosron ki love story
+            mein ghusna band kar! 💔"
+          </p>
+        </div>
+
+        <div class="insult-card">
+          <span class="insult-emoji">🤪</span>
+          <p class="insult-text">
+            "Password: 'password123' try kiya tha na? Bhai, main itna simple
+            nahi hun! 😎"
+          </p>
+        </div>
+      </div>
+
+      <div class="countdown" id="countdown">
+        Redirecting you OUT in: <span id="timer">10</span> seconds! 😤
+      </div>
+
+      <a href="javascript:history.back()" class="go-back-btn">
+        🏃 BHAG YAHAN SE! (Go Back)
+      </a>
+    </div>
+
+    <script>
+      // Custom angry cursor
+      document.addEventListener("mousemove", function (e) {
+        const cursor = document.getElementById("angryCursor");
+        cursor.style.left = e.clientX + "px";
+        cursor.style.top = e.clientY + "px";
+      });
+
+      // Flying angry emojis
+      function createFlyingEmoji() {
+        const emojis = ["😡", "🤬", "💢", "👿", "😤", "🔥", "💥", "⚡"];
+        const emoji = document.createElement("div");
+        emoji.className = "flying-emoji";
+        emoji.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+        emoji.style.left = "-100px";
+        emoji.style.top = Math.random() * window.innerHeight + "px";
+        emoji.style.animationDelay = Math.random() * 2 + "s";
+        document.getElementById("flyingEmojis").appendChild(emoji);
+
+        setTimeout(() => {
+          emoji.remove();
+        }, 4000);
+      }
+
+      // Create flying emojis every 500ms
+      setInterval(createFlyingEmoji, 500);
+
+      // Screen shake effect
+      let shakeInterval;
+      function startScreenShake() {
+        document.body.classList.add("screen-shake");
+        clearTimeout(shakeInterval);
+        shakeInterval = setTimeout(() => {
+          document.body.classList.remove("screen-shake");
+        }, 5000);
+      }
+
+      // Start shaking immediately
+      startScreenShake();
+
+      // Shake on click
+      document.addEventListener("click", startScreenShake);
+
+      // Countdown timer
+      let timeLeft = 10;
+      const timerElement = document.getElementById("timer");
+
+      const countdownInterval = setInterval(() => {
+        timeLeft--;
+        timerElement.textContent = timeLeft;
+
+        if (timeLeft <= 0) {
+          clearInterval(countdownInterval);
+          // Try to go back, if not possible, show final message
+          try {
+            window.history.back();
+          } catch (e) {
+            // If can't go back, show final angry message
+            document.body.innerHTML = `
+                        <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100vh; text-align: center; font-family: 'Fredoka One', cursive;">
+                            <div style="font-size: 10rem; animation: spin 2s linear infinite;">😡</div>
+                            <h1 style="color: white; font-size: 3rem; margin: 20px;">TIME'S UP!</h1>
+                            <p style="color: white; font-size: 1.5rem;">Close this tab and RESPECT PRIVACY! 🚪</p>
+                            <button onclick="window.close()" style="
+                                background: #ff0000; 
+                                color: white; 
+                                border: none; 
+                                padding: 15px 30px; 
+                                font-size: 1.2rem; 
+                                border-radius: 10px; 
+                                cursor: pointer; 
+                                margin-top: 20px;
+                                font-family: 'Fredoka One', cursive;
+                            ">🏃 CLOSE TAB</button>
+                        </div>
+                        <style>
+                            @keyframes spin {
+                                from { transform: rotate(0deg); }
+                                to { transform: rotate(360deg); }
+                            }
+                        </style>
+                    `;
+          }
+        }
+      }, 1000);
+
+      // Funny messages that appear randomly
+      const funnyMessages = [
+        "👻 BOO! Scared? You should be!",
+        "🚨 PRIVACY POLICE ALERT! 🚨",
+        "🤖 Error 404: Permission Not Found!",
+        "🔐 This is PRIVATE property!",
+        "😂 Nice try, but NO!",
+        "🎭 Drama queen detected!",
+        "🧠 Use your brain next time!",
+        "👑 Only ROYALTY allowed!",
+      ];
+
+      // Show random messages
+      setInterval(() => {
+        const message =
+          funnyMessages[Math.floor(Math.random() * funnyMessages.length)];
+        const alertDiv = document.createElement("div");
+        alertDiv.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: rgba(255, 0, 0, 0.9);
+                color: white;
+                padding: 15px;
+                border-radius: 10px;
+                font-size: 1.2rem;
+                font-weight: bold;
+                z-index: 9998;
+                animation: slideIn 0.5s ease-out;
+            `;
+        alertDiv.innerHTML = message;
+        document.body.appendChild(alertDiv);
+
+        setTimeout(() => {
+          alertDiv.style.animation = "slideOut 0.5s ease-out";
+          setTimeout(() => alertDiv.remove(), 500);
+        }, 2000);
+      }, 3000);
+
+      // Add slide animations
+      const style = document.createElement("style");
+      style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+        `;
+      document.head.appendChild(style);
+
+      // Prevent right click and F12
+      document.addEventListener("contextmenu", function (e) {
+        e.preventDefault();
+        alert("😡 Right click disabled! Hacker ban-ne ki koshish mat kar!");
+      });
+
+      document.addEventListener("keydown", function (e) {
+        if (
+          e.key === "F12" ||
+          (e.ctrlKey && e.shiftKey && e.key === "I") ||
+          (e.ctrlKey && e.shiftKey && e.key === "C")
+        ) {
+          e.preventDefault();
+          alert("🚫 Developer tools disabled! Smart ban-ne ki zarurat nahi!");
+        }
+      });
+
+      // Change page title randomly
+      const angryTitles = [
+        "😡 GO AWAY!",
+        "🤬 WRONG PASSWORD!",
+        "💢 ANGRY MODE ON!",
+        "🔥 PRIVACY VIOLATION!",
+        "⚡ ACCESS DENIED!",
+      ];
+
+      setInterval(() => {
+        document.title =
+          angryTitles[Math.floor(Math.random() * angryTitles.length)];
+      }, 2000);
+    </script>
+  </body>
+</html>

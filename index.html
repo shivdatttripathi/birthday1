@@ -26,6 +26,113 @@
         min-height: 100vh;
         position: relative;
       }
+      /* Password Protection Screen */
+      .password-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 3000;
+        transition: all 1s ease;
+      }
+
+      .password-container {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 50px;
+        border-radius: 25px;
+        text-align: center;
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(10px);
+        max-width: 500px;
+        width: 90%;
+        position: relative;
+      }
+
+      .password-title {
+        font-family: "Great Vibes", cursive;
+        font-size: 3rem;
+        color: #8b4cb8;
+        margin-bottom: 20px;
+        animation: glow 2s infinite alternate;
+      }
+
+      .password-subtitle {
+        font-size: 1.2rem;
+        color: #2c3e50;
+        margin-bottom: 30px;
+        line-height: 1.6;
+      }
+
+      .password-input {
+        width: 100%;
+        padding: 15px 20px;
+        font-size: 1.1rem;
+        border: 2px solid #ddd;
+        border-radius: 50px;
+        outline: none;
+        text-align: center;
+        font-family: "Poppins", sans-serif;
+        margin-bottom: 20px;
+        transition: all 0.3s ease;
+      }
+
+      .password-input:focus {
+        border-color: #8b4cb8;
+        box-shadow: 0 0 20px rgba(139, 76, 184, 0.3);
+      }
+
+      .password-btn {
+        background: linear-gradient(45deg, #ff6b9d, #c44569);
+        color: white;
+        border: none;
+        padding: 15px 40px;
+        font-size: 1.2rem;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 20px rgba(255, 107, 157, 0.3);
+        font-family: "Poppins", sans-serif;
+        width: 100%;
+      }
+
+      .password-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 30px rgba(255, 107, 157, 0.4);
+      }
+
+      .error-message {
+        color: #e74c3c;
+        font-size: 1rem;
+        margin-top: 10px;
+        display: none;
+      }
+
+      @media (max-width: 768px) {
+        .password-container {
+          padding: 30px;
+        }
+        .password-title {
+          font-size: 2.5rem;
+        }
+      }
+      @keyframes shake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        25% {
+          transform: translateX(-10px);
+        }
+        75% {
+          transform: translateX(10px);
+        }
+      }
 
       /* Romantic particles background */
       .particles {
@@ -604,11 +711,32 @@
         animation: modalPop 0.5s ease-out;
         max-height: 90vh;
         overflow-y: auto;
-      }0
+      }
     </style>
   </head>
   <body>
     <!-- Opening Screen -->
+    <div class="password-screen" id="passwordScreen">
+      <div class="password-container">
+        <h1 class="password-title">🔐 Private Access</h1>
+        <p class="password-subtitle">
+          This is a special birthday surprise! 🎉<br />
+          Please enter the secret password to continue...
+        </p>
+        <input
+          type="password"
+          id="passwordInput"
+          class="password-input"
+          placeholder="Enter Password..."
+          maxlength="20"
+        />
+        <button class="password-btn" onclick="checkPassword()">💖 Enter</button>
+        <div class="error-message" id="errorMessage">
+          ❌ Wrong password! Please try again...
+        </div>
+      </div>
+    </div>
+
     <div class="opening-screen" id="openingScreen">
       <h1 class="opening-title">Mere Pyaar Ke Liye...</h1>
       <p class="love-message">
@@ -818,6 +946,47 @@
     </div>
 
     <script>
+      // Password protection
+      const correctPassword = "yara2025"; // CHANGE THIS TO YOUR DESIRED PASSWORD
+
+      function checkPassword() {
+        const inputPassword = document.getElementById("passwordInput").value;
+        const errorMessage = document.getElementById("errorMessage");
+        const passwordScreen = document.getElementById("passwordScreen");
+
+        if (inputPassword === correctPassword) {
+          // Correct password - hide password screen
+          passwordScreen.style.opacity = "0";
+          passwordScreen.style.transform = "translateY(-100%)";
+
+          setTimeout(() => {
+            passwordScreen.style.display = "none";
+          }, 1000);
+        } else {
+          // Wrong password - show error
+          errorMessage.style.display = "block";
+          document.getElementById("passwordInput").value = "";
+
+          // Shake animation
+          const container = document.querySelector(".password-container");
+          container.style.animation = "shake 0.5s ease-in-out";
+
+          setTimeout(() => {
+            container.style.animation = "";
+            errorMessage.style.display = "none";
+          }, 3000);
+        }
+      }
+
+      // Allow Enter key to submit password
+      document
+        .getElementById("passwordInput")
+        .addEventListener("keypress", function (e) {
+          if (e.key === "Enter") {
+            checkPassword();
+          }
+        });
+
       // Create particles
       function createParticles() {
         const particles = document.getElementById("particles");
